@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["GOV50FINAL-PROJECT-NEW.html","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["GOV50FINAL-PROJECT-NEW.html","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1519,7 +1519,133 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="d-article">
 <h2 id="project-thoughts">Project thoughts</h2>
 <p>Do American citizens vote less in presidential elections during times of economic success and more in times of economic decline? In this study, I plan to examine the correlation between voter turnout and GDP in presidential election years. I hypothesize that in times of economic decline, citizens will be more likely to vote in an effort to drive change in economic policy. Concurrently, I believe that in times of relative economic prosperity voters will experience a sense of security and maybe not be as motivated to go to the polls. I would combine two separate data sets for this study: one on the turnout results of every state in every presidential election since 1976, and the other on the GDP of the U.S. in every year from 1960-2023. The explanatory variables would be the yearly GDP and GDP per capita of the U.S, with the outcome variable being the turnout in presidential elections since 1976. If we see a correlation in which turnout (X) is typically higher when GDP (Y) is low, that would support my hypothesis that low economic strength leads to the electorate opting for change. If instead, the data reflects relatively steady turnout rates that are not affected by GDP that may contribute to disproving my hypothesis. Another thing that could disprove my hypothesis is if we actually find that turnout is higher during times of economic strength; this could be explained by the electorate being motivated to protect the strength of the economy leading to higher turnout.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#Loading Packages</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tidymodels/infer'>infer</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://scales.r-lib.org'>scales</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># loading data </span></span>
+<span><span class='va'>turnout</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"~/Downloads/VEP_Turnout.csv"</span>, show_col_types <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>gdp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"~/Downloads/us_gdp.csv"</span>, show_col_types <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>turnout</span></span></code></pre>
+</div>
+<pre><code># A tibble: 16 × 4
+   year_presidential vep_presidential_turnout year_midterm
+               &lt;dbl&gt;                    &lt;dbl&gt;        &lt;dbl&gt;
+ 1              1960                     63.8         1962
+ 2              1964                     62.8         1966
+ 3              1968                     62.5         1970
+ 4              1972                     56.2         1974
+ 5              1976                     54.8         1978
+ 6              1980                     54.2         1982
+ 7              1984                     55.2         1986
+ 8              1988                     52.8         1990
+ 9              1992                     58.1         1994
+10              1996                     51.7         1998
+11              2000                     54.2         2002
+12              2004                     60.1         2006
+13              2008                     61.6         2010
+14              2012                     58.6         2014
+15              2016                     60.1         2018
+16              2020                     66.6         2022
+# ℹ 1 more variable: vep_midterm_turnout &lt;dbl&gt;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>gdp</span></span></code></pre>
+</div>
+<pre><code># A tibble: 1 × 63
+  country_name  country_code    `1960`  `1961`  `1962`  `1963`  `1964`
+  &lt;chr&gt;         &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1 United States USA            5.43e11 5.63e11 6.05e11 6.39e11 6.86e11
+# ℹ 56 more variables: `1965` &lt;dbl&gt;, `1966` &lt;dbl&gt;, `1967` &lt;dbl&gt;,
+#   `1968` &lt;dbl&gt;, `1969` &lt;dbl&gt;, `1970` &lt;dbl&gt;, `1971` &lt;dbl&gt;,
+#   `1972` &lt;dbl&gt;, `1973` &lt;dbl&gt;, `1974` &lt;dbl&gt;, `1975` &lt;dbl&gt;,
+#   `1976` &lt;dbl&gt;, `1977` &lt;dbl&gt;, `1978` &lt;dbl&gt;, `1979` &lt;dbl&gt;,
+#   `1980` &lt;dbl&gt;, `1981` &lt;dbl&gt;, `1982` &lt;dbl&gt;, `1983` &lt;dbl&gt;,
+#   `1984` &lt;dbl&gt;, `1985` &lt;dbl&gt;, `1986` &lt;dbl&gt;, `1987` &lt;dbl&gt;,
+#   `1988` &lt;dbl&gt;, `1989` &lt;dbl&gt;, `1990` &lt;dbl&gt;, `1991` &lt;dbl&gt;, …</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>scipen <span class='op'>=</span> <span class='fl'>999</span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Pivoting GDP Data</span></span>
+<span></span>
+<span><span class='va'>gdp_long</span> <span class='op'>&lt;-</span> <span class='va'>gdp</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_longer.html'>pivot_longer</a></span><span class='op'>(</span></span>
+<span>    cols <span class='op'>=</span> <span class='va'>`1960`</span><span class='op'>:</span><span class='va'>`2020`</span>,</span>
+<span>    names_to <span class='op'>=</span> <span class='st'>"year"</span>,</span>
+<span>    values_to <span class='op'>=</span> <span class='st'>"GDP"</span></span>
+<span>  <span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>year <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='va'>year</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>gdp_long</span></span></code></pre>
+</div>
+<pre><code># A tibble: 61 × 4
+   country_name  country_code  year           GDP
+   &lt;chr&gt;         &lt;chr&gt;        &lt;int&gt;         &lt;dbl&gt;
+ 1 United States USA           1960  543000000000
+ 2 United States USA           1961  563000000000
+ 3 United States USA           1962  605000000000
+ 4 United States USA           1963  639000000000
+ 5 United States USA           1964  686000000000
+ 6 United States USA           1965  744000000000
+ 7 United States USA           1966  815000000000
+ 8 United States USA           1967  862000000000
+ 9 United States USA           1968  943000000000
+10 United States USA           1969 1020000000000
+# ℹ 51 more rows</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#Joining the Data</span></span>
+<span></span>
+<span><span class='va'>gdp_turnout</span> <span class='op'>&lt;-</span> <span class='va'>gdp_long</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/cross_join.html'>cross_join</a></span><span class='op'>(</span><span class='va'>turnout</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>gdp_turnout</span></span></code></pre>
+</div>
+<pre><code># A tibble: 976 × 8
+   country_name  country_code  year          GDP year_presidential
+   &lt;chr&gt;         &lt;chr&gt;        &lt;int&gt;        &lt;dbl&gt;             &lt;dbl&gt;
+ 1 United States USA           1960 543000000000              1960
+ 2 United States USA           1960 543000000000              1964
+ 3 United States USA           1960 543000000000              1968
+ 4 United States USA           1960 543000000000              1972
+ 5 United States USA           1960 543000000000              1976
+ 6 United States USA           1960 543000000000              1980
+ 7 United States USA           1960 543000000000              1984
+ 8 United States USA           1960 543000000000              1988
+ 9 United States USA           1960 543000000000              1992
+10 United States USA           1960 543000000000              1996
+# ℹ 966 more rows
+# ℹ 3 more variables: vep_presidential_turnout &lt;dbl&gt;,
+#   year_midterm &lt;dbl&gt;, vep_midterm_turnout &lt;dbl&gt;</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>gdp_turnout</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>year</span>, y <span class='op'>=</span> <span class='va'>GDP</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Year"</span>, y <span class='op'>=</span> <span class='st'>"GDP"</span>, title <span class='op'>=</span> <span class='st'>"U.S. GDP by Year"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span><span class='op'>(</span></span>
+<span>    labels  <span class='op'>=</span> <span class='fu'><a href='https://scales.r-lib.org/reference/label_number.html'>label_number</a></span><span class='op'>(</span>scale <span class='op'>=</span> <span class='fl'>1e-12</span>, </span>
+<span>                           prefix <span class='op'>=</span> <span class='st'>"$"</span>, </span>
+<span>                           suffix <span class='op'>=</span> <span class='st'>"t"</span>, </span>
+<span>                           accuracy <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></span>
+<span>    <span class='op'>)</span> </span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
+</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
