@@ -21,12 +21,14 @@ Do American citizens vote less in presidential elections during times of economi
 library(tidyverse)
 library(infer)
 library(scales)
+library(readr)
 ```
 
 ```{r}
 # loading data 
-gdp <- us_gdp
-turnout <- VEP_Turnout
+turnout <- read_csv("~/Downloads/VEP_Turnout.csv", show_col_types = FALSE)
+
+gdp <- read_csv("~/Downloads/us_gdp.csv", show_col_types = FALSE)
 
 turnout
 gdp
