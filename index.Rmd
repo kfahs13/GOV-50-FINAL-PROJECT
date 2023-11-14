@@ -32,8 +32,6 @@ gdp <- read_csv("~/Downloads/us_gdp.csv", show_col_types = FALSE)
 
 turnout
 gdp
-
-options(scipen = 999)
 ```
 
 
@@ -77,8 +75,31 @@ gdp_turnout |>
 
 
 
+```{r}
+# Plotting GDP against Turnout
+library(broom)
+
+gdp_turnout |>
+  ggplot(aes(x = GDP, y = vep_presidential_turnout)) + 
+  geom_point() +
+  labs(title = "Presidential Turnout Based on GDP") +
+  scale_x_continuous(
+    labels  = label_number(scale = 1e-12, 
+                           prefix = "$", 
+                           suffix = "t", 
+                           accuracy = 1))
+
+fit_1 <- lm(vep_presidential_turnout ~ GDP, data = gdp_turnout) 
+
+fit_1 |>
+  broom::tidy() |>
+  select(term, estimate) |>  
+  knitr::kable(digits = 2)
 
 
+```
+
+  Based on the results of this second visualization, we can see that any particular GDP can have any outcome of turnout. This trend holds true for both times of economic decline and times of economic success. With that being said, based on the plot there seems to be no relation between GDP and turnout in presidential elections and this is backed up by the linear regression. The linear model suggests that for a one unit increase in GDP there is no increase in voter turnout.  
 
 
 
