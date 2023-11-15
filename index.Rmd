@@ -37,7 +37,7 @@ gdp
 
 
 ```{r}
-# Pivoting GDP Data
+# Pivoting GDP Data to make Years rows
 
 gdp_long <- gdp |>
   pivot_longer(
@@ -48,17 +48,23 @@ gdp_long <- gdp |>
   mutate(year = as.integer(year))
 
 gdp_long
+
+
 ```
 
 ```{r}
 #Joining the Data
 
-gdp_turnout <- gdp_long |>
+gdp_turnout <-gdp_long |>
   cross_join(turnout)
 
-gdp_turnout
-```
+gdp_turnout_presidential <- gdp_turnout |>
+  subset(year == year_presidential)
 
+gdp_turnout
+
+gdp_turnout_presidential
+```
 
 ```{r}
 gdp_turnout |>
@@ -79,9 +85,13 @@ gdp_turnout |>
 # Plotting GDP against Turnout
 library(broom)
 
-gdp_turnout |>
+
+
+gdp_turnout_presidential |>
+  group_by(year_presidential) |>
   ggplot(aes(x = GDP, y = vep_presidential_turnout)) + 
   geom_point() +
+  geom_smooth() +
   labs(title = "Presidential Turnout Based on GDP") +
   scale_x_continuous(
     labels  = label_number(scale = 1e-12, 
@@ -89,17 +99,15 @@ gdp_turnout |>
                            suffix = "t", 
                            accuracy = 1))
 
-fit_1 <- lm(vep_presidential_turnout ~ GDP, data = gdp_turnout) 
+fit_1 <- lm(vep_presidential_turnout ~ GDP, data = gdp_turnout_presidential)
 
-fit_1 |>
-  broom::tidy() |>
-  select(term, estimate) |>  
-  knitr::kable(digits = 2)
+fit_1
 
 
 ```
 
-  Based on the results of this second visualization, we can see that any particular GDP can have any outcome of turnout. This trend holds true for both times of economic decline and times of economic success. With that being said, based on the plot there seems to be no relation between GDP and turnout in presidential elections and this is backed up by the linear regression. The linear model suggests that for a one unit increase in GDP there is no increase in voter turnout.  
+
+  Based on the results of this second visualization, we can see that any particular GDP can have any outcome of turnout. This trend holds true for both times of economic decline and times of economic success. With that being said, based on the plot there seems to be a slight relation between GDP and turnout in presidential elections and this is backed up by the linear regression. The linear model suggests that for a one unit increase in GDP there is a near zero increase in Presidential voter turnout.  When analyzing the graph, it is important to note that there are more elections that occurred during times of relative economic decline but this may be simply due to the fact that they represent multiple decades prior to today. These low turnouts for low GDPs may be counteracting high turnouts for high GDPs, creating a near zero relation. This does not completely rule out my hypothesis because within a shortened time frame, it is possible that we will see more of a relation between GDP and voter turnout.
 
 
 
