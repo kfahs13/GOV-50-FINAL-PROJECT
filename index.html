@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["GOV50FINAL-PROJECT-NEW.html","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["GOV50FINAL-PROJECT-NEW.html","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1517,8 +1517,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<h2 id="project-thoughts">Project thoughts</h2>
-<p>Do American citizens vote less in presidential elections during times of economic success and more in times of economic decline? In this study, I plan to examine the correlation between voter turnout and GDP in presidential election years. I hypothesize that in times of economic decline, citizens will be more likely to vote in an effort to drive change in economic policy. Concurrently, I believe that in times of relative economic prosperity voters will experience a sense of security and maybe not be as motivated to go to the polls. I would combine two separate data sets for this study: one on the turnout results of every state in every presidential election since 1976, and the other on the GDP of the U.S. in every year from 1960-2023. The explanatory variables would be the yearly GDP and GDP per capita of the U.S, with the outcome variable being the turnout in presidential elections since 1976. If we see a correlation in which turnout (X) is typically higher when GDP (Y) is low, that would support my hypothesis that low economic strength leads to the electorate opting for change. If instead, the data reflects relatively steady turnout rates that are not affected by GDP that may contribute to disproving my hypothesis. Another thing that could disprove my hypothesis is if we actually find that turnout is higher during times of economic strength; this could be explained by the electorate being motivated to protect the strength of the economy leading to higher turnout.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#Loading Packages</span></span>
@@ -1609,7 +1607,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/cross_join.html'>cross_join</a></span><span class='op'>(</span><span class='va'>turnout</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>gdp_turnout_presidential</span> <span class='op'>&lt;-</span> <span class='va'>gdp_turnout</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>year</span> <span class='op'>==</span> <span class='va'>year_presidential</span><span class='op'>)</span></span>
+<span>    <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>year</span> <span class='op'>==</span> <span class='va'>year_presidential</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>gdp_turnout</span></span></code></pre>
 </div>
@@ -1654,34 +1652,40 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 # ℹ 3 more variables: vep_presidential_turnout &lt;dbl&gt;,
 #   year_midterm &lt;dbl&gt;, vep_midterm_turnout &lt;dbl&gt;</code></pre>
 </div>
+<h2 id="introduction">Introduction</h2>
+<p>Do American citizens vote less in presidential elections during times of economic success and more in times of economic decline? This question is interesting due to the prevalent belief that the economy is a major consideration of voters, considering that belief it would make sense to see a relation between the performance of our economy and voter turnout. In this study, I plan to examine the correlation between voter turnout and GDP in presidential election years. I hypothesize that in times of economic decline, citizens will be more likely to vote in an effort to drive change in economic policy. Concurrently, I believe that in times of relative economic prosperity voters will experience a sense of security and maybe not be as motivated to go to the polls. The explanatory variables would be the GDP of the U.S in midterm and presidential election years, with the outcome variable being the turnout in midterm and presidential elections since 1976. If we see a correlation in which turnout (Y) is typically higher when GDP (x) is low, that would support my hypothesis that low economic strength leads to the electorate opting for change. If instead, the data reflects relatively steady turnout rates that are not affected by GDP that may contribute to disproving my hypothesis. Another thing that could disprove my hypothesis is if we actually find that turnout is higher during times of economic strength; this could be explained by the electorate being motivated to protect the strength of the economy leading to higher turnout.</p>
+<h2 id="data-section">Data Section</h2>
+<p>I combined two separate data sets for this study. The first contains the VEP turnout results of every midterm presidential election since 1976. This first data set came from electproject.org. VEP turnout is a method of measuring turnout which divides the amount of votes by the voter eligible population; it provides the most accurate results and is the preffered method of calculating turnout. The other data set contains the GDP of the U.S. in every year from 1960-2023. This data set came from macrotrends.net. Macrotrends sources the data on GDP from the World Bank; they use the total gross value added by resident producers in an economy to calculate their numbers.</p>
+<p>To make these data sets work for my intentions I had to pivot the GDP data set to convert ‘Years’ from Columns to Rows. This made the data set much easier to read and deal with. after that, I used a cross_join to merge the data sets which is when I ran into another issue. The joining created a tibble in which every year from 1960 to 2020 had a row within every presidential year. To fix this I used the function “Subset” to make it so that ‘Year’ had to be the same value as ‘year_presidential” in order to remain in the tibble. My research design is a Cohort Observational study looking at American voters’ reaction to relative economic prosperity or decline.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>gdp_turnout</span> <span class='op'>|&gt;</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#Plot Visualizing Main Outcoe of Interest (GDP)</span></span>
+<span></span>
+<span><span class='va'>gdp_turnout</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>year</span>, y <span class='op'>=</span> <span class='va'>GDP</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Year"</span>, y <span class='op'>=</span> <span class='st'>"GDP"</span>, title <span class='op'>=</span> <span class='st'>"U.S. GDP by Year"</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span><span class='op'>(</span></span>
-<span>    labels  <span class='op'>=</span> <span class='fu'><a href='https://scales.r-lib.org/reference/label_number.html'>label_number</a></span><span class='op'>(</span>scale <span class='op'>=</span> <span class='fl'>1e-12</span>, </span>
-<span>                           prefix <span class='op'>=</span> <span class='st'>"$"</span>, </span>
-<span>                           suffix <span class='op'>=</span> <span class='st'>"t"</span>, </span>
-<span>                           accuracy <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></span>
-<span>    <span class='op'>)</span> </span></code></pre>
+<span>                     labels  <span class='op'>=</span> <span class='fu'><a href='https://scales.r-lib.org/reference/label_number.html'>label_number</a></span><span class='op'>(</span>scale <span class='op'>=</span> <span class='fl'>1e-12</span>, </span>
+<span>                     prefix <span class='op'>=</span> <span class='st'>"$"</span>, </span>
+<span>                     suffix <span class='op'>=</span> <span class='st'>"t"</span>, </span>
+<span>                     accuracy <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></span>
+<span>                     <span class='op'>)</span> </span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
 </div>
+<p>#Results Section</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Plotting GDP against Turnout</span></span>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://broom.tidymodels.org/'>broom</a></span><span class='op'>)</span></span>
-<span></span>
-<span></span>
 <span></span>
 <span><span class='va'>gdp_turnout_presidential</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>year_presidential</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>GDP</span>, y <span class='op'>=</span> <span class='va'>vep_presidential_turnout</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Presidential Turnout Based on GDP"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Presidential Turnout Based on GDP (1960-2020)"</span>, y <span class='op'>=</span> <span class='st'>"VEP Presidential Turnout"</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_continuous</a></span><span class='op'>(</span></span>
 <span>    labels  <span class='op'>=</span> <span class='fu'><a href='https://scales.r-lib.org/reference/label_number.html'>label_number</a></span><span class='op'>(</span>scale <span class='op'>=</span> <span class='fl'>1e-12</span>, </span>
 <span>                           prefix <span class='op'>=</span> <span class='st'>"$"</span>, </span>
@@ -1690,7 +1694,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <img src="index_files/figure-html5/unnamed-chunk-6-1.png" width="624" />
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fit_1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>vep_presidential_turnout</span> <span class='op'>~</span> <span class='va'>GDP</span>, data <span class='op'>=</span> <span class='va'>gdp_turnout_presidential</span><span class='op'>)</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#Running Regression on GDp/Turnout</span></span>
+<span></span>
+<span><span class='va'>fit_1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>vep_presidential_turnout</span> <span class='op'>~</span> <span class='va'>GDP</span>, data <span class='op'>=</span> <span class='va'>gdp_turnout_presidential</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>fit_1</span></span></code></pre>
 </div>
@@ -1702,8 +1708,58 @@ Coefficients:
 (Intercept)          GDP  
   5.690e+01    1.831e-13  </code></pre>
 </div>
-<p>Based on the results of this second visualization, we can see that any particular GDP can have any outcome of turnout. This trend holds true for both times of economic decline and times of economic success. With that being said, based on the plot there seems to be a slight relation between GDP and turnout in presidential elections and this is backed up by the linear regression. The linear model suggests that for a one unit increase in GDP there is a near zero increase in Presidential voter turnout. When analyzing the graph, it is important to note that there are more elections that occurred during times of relative economic decline but this may be simply due to the fact that they represent multiple decades prior to today. These low turnouts for low GDPs may be counteracting high turnouts for high GDPs, creating a near zero relation. This does not completely rule out my hypothesis because within a shortened time frame, it is possible that we will see more of a relation between GDP and voter turnout.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Based on the results of this second visualization, we can see that any particular GDP can have any outcome of turnout. This trend holds true for both times of economic decline and times of economic success. With that being said, based on the plot there seems to be a slight relation between GDP and turnout in presidential elections and this is backed up by the linear regression. The linear model suggests that for a one unit increase in GDP there is a near zero increase in Presidential voter turnout.</p>
+<p>When analyzing the graph, it is important to note that there are more elections that occurred during times of relative economic decline but this may be simply due to the fact that they represent multiple decades prior to today. These low turnouts for low GDPs may be counteracting high turnouts for high GDPs, creating a near zero relation. This does not completely rule out my hypothesis because within a shortened time frame, it is possible that we will see more of a relation between GDP and voter turnout.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Plotting GDP against Turnout in the 21st Century</span></span>
+<span></span>
+<span><span class='va'>gdp_turnout_presidential_21st</span> <span class='op'>&lt;-</span> <span class='va'>gdp_turnout_presidential</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>year_presidential</span> <span class='op'>&gt;=</span> <span class='fl'>2000</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>gdp_turnout_presidential_21st</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>year_presidential</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>GDP</span>, y <span class='op'>=</span> <span class='va'>vep_presidential_turnout</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Presidential Turnout Based on GDP"</span>, y <span class='op'>=</span> <span class='st'>"VEP Presidential Turnout"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_continuous</a></span><span class='op'>(</span></span>
+<span>    labels  <span class='op'>=</span> <span class='fu'><a href='https://scales.r-lib.org/reference/label_number.html'>label_number</a></span><span class='op'>(</span>scale <span class='op'>=</span> <span class='fl'>1e-12</span>, </span>
+<span>                           prefix <span class='op'>=</span> <span class='st'>"$"</span>, </span>
+<span>                           suffix <span class='op'>=</span> <span class='st'>"t"</span>, </span>
+<span>                           accuracy <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<img src="index_files/figure-html5/unnamed-chunk-7-1.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>gdp_turnout_presidential_21st</span></span></code></pre>
+</div>
+<pre><code># A tibble: 6 × 8
+  country_name  country_code  year     GDP year_presidential
+  &lt;chr&gt;         &lt;chr&gt;        &lt;int&gt;   &lt;dbl&gt;             &lt;dbl&gt;
+1 United States USA           2000 1.03e13              2000
+2 United States USA           2004 1.22e13              2004
+3 United States USA           2008 1.47e13              2008
+4 United States USA           2012 1.62e13              2012
+5 United States USA           2016 1.87e13              2016
+6 United States USA           2020 2.10e13              2020
+# ℹ 3 more variables: vep_presidential_turnout &lt;dbl&gt;,
+#   year_midterm &lt;dbl&gt;, vep_midterm_turnout &lt;dbl&gt;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fit_2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>vep_presidential_turnout</span> <span class='op'>~</span> <span class='va'>GDP</span>, data <span class='op'>=</span> <span class='va'>gdp_turnout_presidential_21st</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>fit_2</span></span></code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = vep_presidential_turnout ~ GDP, data = gdp_turnout_presidential_21st)
+
+Coefficients:
+(Intercept)          GDP  
+  4.768e+01    8.067e-13  </code></pre>
+</div>
+<p>#Conclusion</p>
+<p>At first, I looked at elections from 1960 until the most recent 2020 presidential election to determine if GDP growth over that time affected turnout. I found a near zero effect with this model which led me to dig deeper. After subsetting the data to only include rows from the year 2000 and on, there is now a much different plot to consider. In the graph we see a sine wave shape formed, indicating a growth in turnout as GDP more than doubled in the past 2 decades. The turnout at the beginning of this period was roughly 55%, and at the end it was oer a tenth higher coming in above 65%. When looking at the model, we see that GDP becomes 8 times more influential on turnout when only looking within recent elections than when looking at all since 1960. This seems to indicate a slight growth in the importance of economic factors during 21st century elections. The findings in this research go against my hypothesis that voters vote less when GDP is higher due to a sense of heightened economic security. In fact, we find that as GDP increased there is a slight increase in turnout for every unit increase of GDP. In this analysis I was limited in the economic factors that I looked at when considering the effect on turnout. With more time and money, I could possibly collect more specific data that better reflects the economic status of all Americans, leading to better predictions on turnout.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
